@@ -1,3 +1,4 @@
+import 'profile_screen.dart';
 import 'package:flutter/material.dart';
 
 class CardManagementScreen extends StatefulWidget {
@@ -505,6 +506,7 @@ class _CardManagementScreenState extends State<CardManagementScreen> {
           // Navigate based on selected tab
           switch (index) {
             case 0:
+              // Home navigation - you can create home_screen.dart
               Navigator.pushReplacementNamed(context, '/login');
               break;
             case 1:
@@ -525,11 +527,10 @@ class _CardManagementScreenState extends State<CardManagementScreen> {
               );
               break;
             case 4:
-              // Profile navigation - you can create profile_screen.dart
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Profile page not implemented yet'),
-                ),
+              // Navigate to Profile page
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const ProfileScreen()),
               );
               break;
           }
