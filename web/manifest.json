@@ -1,11 +1,11 @@
 {
-    "name": "learning",
-    "short_name": "learning",
+    "name": "Taplerr",
+    "short_name": "Taplerr",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#F5EFE8",
+    "theme_color": "#A07E58",
+    "description": "Taplerr — digital NFC business card companion app.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
