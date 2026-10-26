@@ -1,5 +1,7 @@
 import 'profile_screen.dart';
 import 'package:flutter/material.dart';
+import '../services/auth_service.dart';
+import '../theme/app_colors.dart';
 
 class CardManagementScreen extends StatefulWidget {
   const CardManagementScreen({super.key});
@@ -26,7 +28,7 @@ class _CardManagementScreenState extends State<CardManagementScreen> {
               width: 24,
               height: 24,
               decoration: const BoxDecoration(
-                color: Color(0xFF4285F4),
+                color: AppColors.primary,
                 shape: BoxShape.circle,
               ),
               child: const Center(
@@ -92,9 +94,11 @@ class _CardManagementScreenState extends State<CardManagementScreen> {
           ),
           const SizedBox(width: 8),
           TextButton(
-            onPressed: () {
-              // Navigate back to login page
-              Navigator.pushReplacementNamed(context, '/login');
+            onPressed: () async {
+              await AuthService.instance.logout();
+              if (context.mounted) {
+                Navigator.pushReplacementNamed(context, '/login');
+              }
             },
             child: const Text(
               'Logout',
@@ -211,7 +215,7 @@ class _CardManagementScreenState extends State<CardManagementScreen> {
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
-                        borderSide: const BorderSide(color: Color(0xFF4285F4)),
+                        borderSide: const BorderSide(color: AppColors.primary),
                       ),
                       contentPadding: const EdgeInsets.symmetric(
                         horizontal: 16,
@@ -247,7 +251,7 @@ class _CardManagementScreenState extends State<CardManagementScreen> {
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
-                        borderSide: const BorderSide(color: Color(0xFF4285F4)),
+                        borderSide: const BorderSide(color: AppColors.primary),
                       ),
                       contentPadding: const EdgeInsets.symmetric(
                         horizontal: 16,
@@ -267,12 +271,12 @@ class _CardManagementScreenState extends State<CardManagementScreen> {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
                             content: Text('Card binding initiated'),
-                            backgroundColor: Color(0xFF4285F4),
+                            backgroundColor: AppColors.primary,
                           ),
                         );
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF4285F4),
+                        backgroundColor: AppColors.primary,
                         foregroundColor: Colors.white,
                         padding: const EdgeInsets.symmetric(vertical: 16),
                         shape: RoundedRectangleBorder(
@@ -536,7 +540,7 @@ class _CardManagementScreenState extends State<CardManagementScreen> {
           }
         },
         type: BottomNavigationBarType.fixed,
-        selectedItemColor: const Color(0xFF4285F4),
+        selectedItemColor: AppColors.primary,
         unselectedItemColor: Colors.grey,
         backgroundColor: Colors.white,
         elevation: 8,

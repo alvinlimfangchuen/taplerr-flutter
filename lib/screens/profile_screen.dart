@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
+import '../services/auth_service.dart';
+import '../theme/app_colors.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -39,7 +41,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               content: Text('Profile picture updated successfully'),
-              backgroundColor: Color(0xFF4285F4),
+              backgroundColor: AppColors.primary,
             ),
           );
         }
@@ -146,12 +148,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
             width: 60,
             height: 60,
             decoration: BoxDecoration(
-              color: (color ?? const Color(0xFF4285F4)).withValues(alpha: 0.1),
+              color: (color ?? AppColors.primary).withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(15),
             ),
             child: Icon(
               icon,
-              color: color ?? const Color(0xFF4285F4),
+              color: color ?? AppColors.primary,
               size: 28,
             ),
           ),
@@ -195,7 +197,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 height: 120,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  border: Border.all(color: const Color(0xFF4285F4), width: 3),
+                  border: Border.all(color: AppColors.primary, width: 3),
                 ),
                 child: ClipOval(
                   child: _profileImage != null
@@ -226,7 +228,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     width: 36,
                     height: 36,
                     decoration: const BoxDecoration(
-                      color: Color(0xFF4285F4),
+                      color: AppColors.primary,
                       shape: BoxShape.circle,
                     ),
                     child: const Icon(
@@ -321,10 +323,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
             width: 40,
             height: 40,
             decoration: BoxDecoration(
-              color: const Color(0xFF4285F4).withValues(alpha: 0.1),
+              color: AppColors.primary.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(10),
             ),
-            child: Icon(icon, color: const Color(0xFF4285F4), size: 20),
+            child: Icon(icon, color: AppColors.primary, size: 20),
           ),
           const SizedBox(width: 16),
           Expanded(
@@ -370,7 +372,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
         child: Row(
           children: [
-            Icon(icon, color: const Color(0xFF4285F4), size: 24),
+            Icon(icon, color: AppColors.primary, size: 24),
             const SizedBox(width: 16),
             Expanded(
               child: Text(
@@ -402,7 +404,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               width: 24,
               height: 24,
               decoration: const BoxDecoration(
-                color: Color(0xFF4285F4),
+                color: AppColors.primary,
                 shape: BoxShape.circle,
               ),
               child: const Center(
@@ -468,8 +470,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
           const SizedBox(width: 8),
           TextButton(
-            onPressed: () {
-              Navigator.pushReplacementNamed(context, '/login');
+            onPressed: () async {
+              await AuthService.instance.logout();
+              if (context.mounted) {
+                Navigator.pushReplacementNamed(context, '/login');
+              }
             },
             child: const Text(
               'Logout',
@@ -572,7 +577,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           }
         },
         type: BottomNavigationBarType.fixed,
-        selectedItemColor: const Color(0xFF4285F4),
+        selectedItemColor: AppColors.primary,
         unselectedItemColor: Colors.grey,
         backgroundColor: Colors.white,
         elevation: 8,
