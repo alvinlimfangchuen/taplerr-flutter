@@ -43,3 +43,6 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Backend PHP source dump used as porting reference — not part of this app
+/porting documentation/flutter/source code/
