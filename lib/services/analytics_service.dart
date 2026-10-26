@@ -14,8 +14,7 @@ class AnalyticsService {
   final ApiClient _client = ApiClient.instance;
 
   Future<AnalyticsSummary> getAnalytics() async {
-    final res = await _client.get('/analytics');
-    final html = res.data is String ? res.data as String : '';
+    final html = await _client.getAuthedHtml('/analytics');
 
     List<TrendPoint> series(String canvasId) {
       final labels = ScrapeUtils.extractArrayAfterAnchor(html, "getElementById('$canvasId')", 'labels');

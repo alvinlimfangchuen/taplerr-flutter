@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'screens/card_screen.dart';
+import 'core/app_shell.dart';
 import 'screens/login_screen.dart';
 import 'screens/register_screen.dart';
 import 'screens/forgot_password_screen.dart';
@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
         '/login': (context) => const LoginScreen(),
         '/register': (context) => const RegisterScreen(),
         '/forgot-password': (context) => const ForgotPasswordScreen(),
-        '/cards': (context) => const CardManagementScreen(),
+        '/home': (context) => const AppShell(),
       },
     );
   }

@@ -40,8 +40,7 @@ class OrderService {
   final ApiClient _client = ApiClient.instance;
 
   Future<List<Order>> getMyOrders() async {
-    final res = await _client.get('/my-orders');
-    final html = res.data is String ? res.data as String : '';
+    final html = await _client.getAuthedHtml('/my-orders');
     final doc = ScrapeUtils.parseDocument(html);
     final orders = <Order>[];
     for (final card in doc.querySelectorAll('.order-card')) {
@@ -77,8 +76,7 @@ class OrderService {
   }
 
   Future<Order?> getOrderDetail(int id) async {
-    final res = await _client.get('/order-detail', queryParameters: {'id': id});
-    final html = res.data is String ? res.data as String : '';
+    final html = await _client.getAuthedHtml('/order-detail', queryParameters: {'id': id});
     final doc = ScrapeUtils.parseDocument(html);
     final header = doc.querySelector('.order-card h2');
     if (header == null) return null;

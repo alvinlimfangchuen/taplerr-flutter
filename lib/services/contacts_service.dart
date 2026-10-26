@@ -19,8 +19,7 @@ class ContactsService {
   final ApiClient _client = ApiClient.instance;
 
   Future<ContactsResponse> getContacts() async {
-    final res = await _client.get('/contacts');
-    final html = res.data is String ? res.data as String : '';
+    final html = await _client.getAuthedHtml('/contacts');
 
     List<Contact> parse(String varName) {
       final raw = ScrapeUtils.extractJsLiteral(html, varName);

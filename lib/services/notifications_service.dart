@@ -15,8 +15,7 @@ class NotificationsService {
   final ApiClient _client = ApiClient.instance;
 
   Future<List<NotificationItem>> getNotifications() async {
-    final res = await _client.get('/notifications');
-    final html = res.data is String ? res.data as String : '';
+    final html = await _client.getAuthedHtml('/notifications');
     final raw = ScrapeUtils.extractJsLiteral(html, 'ALL_NOTIFICATIONS');
     if (raw is! List) return const [];
     return raw.whereType<Map<String, dynamic>>().map((row) {

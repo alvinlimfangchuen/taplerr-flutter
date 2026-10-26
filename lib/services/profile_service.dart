@@ -12,8 +12,7 @@ class ProfileService {
   final ApiClient _client = ApiClient.instance;
 
   Future<Profile> getProfile() async {
-    final res = await _client.get('/profile');
-    final html = res.data is String ? res.data as String : '';
+    final html = await _client.getAuthedHtml('/profile');
     String v(String field) => ScrapeUtils.extractInputValue(html, field);
 
     final socials = <SocialLink>[];

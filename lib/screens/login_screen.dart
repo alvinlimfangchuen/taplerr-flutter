@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../services/auth_service.dart';
 import '../theme/app_colors.dart';
 import '../widgets/auth_card.dart';
-import 'card_screen.dart';
+import '../core/app_shell.dart';
 import 'register_screen.dart';
 import 'forgot_password_screen.dart';
 
@@ -36,7 +36,7 @@ class _LoginScreenState extends State<LoginScreen> {
       if (!mounted) return;
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (_) => const CardManagementScreen()),
+        MaterialPageRoute(builder: (_) => const AppShell()),
       );
     } on AuthException catch (e) {
       setState(() => _errorMessage = e.message);

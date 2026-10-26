@@ -127,8 +127,7 @@ class SubscriptionService {
   }
 
   Future<BillingSnapshot?> getBilling() async {
-    final res = await _client.get('/billing');
-    final html = res.data is String ? res.data as String : '';
+    final html = await _client.getAuthedHtml('/billing');
     final doc = ScrapeUtils.parseDocument(html);
     final card = doc.querySelector('.card');
     if (card == null) return null;

@@ -20,8 +20,7 @@ class CardService {
   final ApiClient _client = ApiClient.instance;
 
   Future<List<NfcCard>> getBoundCards() async {
-    final res = await _client.get('/card-management');
-    final html = res.data is String ? res.data as String : '';
+    final html = await _client.getAuthedHtml('/card-management');
     final doc = ScrapeUtils.parseDocument(html);
     final rows = doc.querySelectorAll('table.nfc-table tbody tr');
     final cards = <NfcCard>[];

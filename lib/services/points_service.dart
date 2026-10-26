@@ -13,8 +13,7 @@ class PointsService {
   final ApiClient _client = ApiClient.instance;
 
   Future<PointsSummary> getPoints() async {
-    final res = await _client.get('/points');
-    final html = res.data is String ? res.data as String : '';
+    final html = await _client.getAuthedHtml('/points');
 
     int statValue(String label) {
       final match = RegExp(
