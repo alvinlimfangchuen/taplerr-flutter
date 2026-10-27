@@ -21,7 +21,9 @@ class NotificationsService {
     return raw.whereType<Map<String, dynamic>>().map((row) {
       return NotificationItem.fromJson({
         'notification_id': row['id'],
-        'notification_type': row['category'], // category is pre-computed; type isn't sent back
+        'category': row['category'],
+        'icon': row['icon'],
+        'color': row['color'],
         'title': row['title'],
         'message': row['message'],
         'is_read': row['is_read'],

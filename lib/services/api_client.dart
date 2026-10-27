@@ -72,8 +72,12 @@ class ApiClient {
     return res.data is String ? res.data as String : '';
   }
 
-  /// GETs [page] and scrapes the hidden `csrf_token` field out of the
-  /// server-rendered HTML — there's no JSON endpoint for this (see doc §2.3).
+  /// GETs [page] and scrapes its CSRF token out of the server-rendered
+  /// HTML — there's no JSON endpoint for this (see doc §2.3). Real forms
+  /// (checkout, subscription) embed it as a hidden `<input>`; pages whose
+  /// CSRF-guarded action is a JS `fetch()` call instead (notifications'
+  /// mark-read/mark-all-read) embed it as `const CSRF_TOKEN = "...";` —
+  /// try both shapes.
   Future<String?> fetchCsrfToken(String page) async {
     final client = await dio;
     final res = await client.get(
@@ -81,10 +85,14 @@ class ApiClient {
       options: Options(contentType: Headers.formUrlEncodedContentType),
     );
     final html = res.data is String ? res.data as String : '';
-    final match = RegExp(
+    final inputMatch = RegExp(
       r'''name=["']csrf_token["']\s+value=["']([^"']+)["']''',
     ).firstMatch(html);
-    return match?.group(1);
+    if (inputMatch != null) return inputMatch.group(1);
+    final jsMatch = RegExp(
+      r'''CSRF_TOKEN\s*=\s*["']([^"']+)["']''',
+    ).firstMatch(html);
+    return jsMatch?.group(1);
   }
 
   /// POSTs [path] with [data] and returns true if the response redirected

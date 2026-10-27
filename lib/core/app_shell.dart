@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../models/notification_item.dart';
 import '../screens/analytics/analytics_screen.dart';
 import '../screens/card/card_management_screen.dart';
 import '../screens/contacts/contacts_screen.dart';
@@ -118,6 +117,3 @@ class _NotificationBellButtonState extends State<_NotificationBellButton> {
     );
   }
 }
-
-/// Re-export for convenience so notification styling stays in one place.
-typedef NotificationStyleRef = NotificationStyle;

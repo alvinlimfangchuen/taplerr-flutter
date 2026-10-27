@@ -136,7 +136,6 @@ class _NotificationTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = item.style;
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(12),
@@ -154,8 +153,8 @@ class _NotificationTile extends StatelessWidget {
             Container(
               width: 38,
               height: 38,
-              decoration: BoxDecoration(color: style.color.withValues(alpha: 0.12), shape: BoxShape.circle),
-              child: Icon(style.icon, color: style.color, size: 18),
+              decoration: BoxDecoration(color: item.color.withValues(alpha: 0.12), shape: BoxShape.circle),
+              child: Icon(item.icon, color: item.color, size: 18),
             ),
             const SizedBox(width: 12),
             Expanded(
